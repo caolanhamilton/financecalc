@@ -8,13 +8,13 @@ type Props = {
 
 export default function DropDown({ options, setPaymentLength }: Props) {
   return (
-    <div className="mt-10 relative border border-green-600 rounded-md p-2 w-96 h-14 flex flex-row items-center">
-      <label className="absolute bg-white px-2 -top-3 left-3 text-sm text-green-600">
+    <div className="relative flex flex-row items-center p-2 mt-10 border border-green-600 rounded-md w-96 h-14">
+      <label className="absolute px-2 text-sm font-bold text-green-600 bg-white -top-3 left-3 font-">
         Select alternative APR
       </label>
       <div className="flex flex-row w-full">
         <select
-          className="w-full form-select appearance-none pr-8 pl-2 bg-no-repeat bg-transparent"
+          className="w-full pl-2 pr-8 bg-transparent bg-no-repeat appearance-none form-select"
           onChange={(e) => {
             setPaymentLength(Number(e.target.value));
           }}

@@ -9,10 +9,10 @@ type Props = {
 export default function TextInputField({ labelText, setState, state }: Props) {
   return (
     <label>
-      <p className="text-green-600 text-xl font-bold mb-6">{labelText}</p>
+      <p className="mb-6 text-xl text-green-600">{labelText}</p>
       <div className="flex flex-row w-64 h-12 border border-green-600 rounded-md">
-        <div className="flex flex-row items-center justify-center w-1/6  h-full border-r bg-green-600">
-          <p className="text-white font-bold text-lg">£</p>
+        <div className="flex flex-row items-center justify-center w-1/6 h-full bg-green-600 border-r">
+          <p className="text-lg font-bold text-white">£</p>
         </div>
         <input
           className="w-full rounded-md"

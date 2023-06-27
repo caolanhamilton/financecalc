@@ -6,7 +6,6 @@ import PrimaryButton from "./PrimaryButton";
 import FinanceExample from "./FinanceExample";
 import CalculationBox from "./CalculationBox";
 import calcMonthlyPayments from "../utils/calcMonthlyPayments";
-import { set } from "cypress/types/lodash";
 
 type Props = {};
 
@@ -20,21 +19,16 @@ export default function CostCalcForm({}: Props) {
   useEffect(() => {
     if (deposit && treatmentCost && paymentLength) {
       setPricePerMonth(
-        calcMonthlyPayments(
-          deposit,
-          treatmentCost,
-          0,
-          paymentLength
-        )
+        calcMonthlyPayments(deposit, treatmentCost, 0, paymentLength)
       );
       setLoanAmount(treatmentCost - deposit);
     }
   }, [deposit, treatmentCost, paymentLength]);
 
   return (
-    <form className="w-3/4 p-6">
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col space-y-10 justify-center w-1/2">
+    <form className="p-6 lg md:w-3/4">
+      <div className="flex flex-col justify-between lg:flex-row">
+        <div className="flex flex-col justify-center space-y-10 lg:w-1/2">
           <TextInputField
             labelText="Treatment Cost"
             setState={setTreatmentCost}
@@ -46,7 +40,7 @@ export default function CostCalcForm({}: Props) {
             state={deposit}
           />
         </div>
-        <div className="w-1/2 flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center mt-8 lg:items-center lg:mt-0 lg:w-1/2">
           <CalculationBox
             loanAmount={loanAmount}
             pricePerMonth={pricePerMonth}
@@ -61,7 +55,7 @@ export default function CostCalcForm({}: Props) {
           />
         </div>
       </div>
-      <div className="mt-10 space-y-6 flex flex-col items-end">
+      <div className="flex flex-col items-end mt-10 space-y-6">
         <FinanceExample />
         <PrimaryButton text="Apply now" />
       </div>
