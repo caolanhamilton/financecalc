@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -14,7 +13,9 @@ export default function LegalDisclaimer({}: Props) {
         customers to credit. All parties named above are authorised and
         regulated by the Financial Conduct Authority. Credit offers subject to
         application and acceptance. Terms and conditions apply.{" "}
-        <a className="text-blue-600" href="www.chrysalisfinance.co.uk/">www.chrysalisfinance.co.uk/.</a>
+        <a className="text-blue-600" href="www.chrysalisfinance.co.uk/">
+          www.chrysalisfinance.co.uk/.
+        </a>
       </p>
     </>
   );

@@ -1,10 +1,16 @@
 export default function calcMonthlyPayments(
-  deposit: number,
-  treatmentCost: number,
+  loanAmount: number,
   interestPercentage: number,
   paymentLength: number
 ): number {
-  const interest = (interestPercentage / 100) * treatmentCost;
-  const monthlyPayment = (treatmentCost - deposit + interest) / paymentLength;
-  return Math.round(monthlyPayment);
+  const monthlyInterestRate = interestPercentage / 100 / 12;
+  if (monthlyInterestRate === 0) {
+    return Number((loanAmount / paymentLength).toFixed(2));
+  }
+  const monthlyPayment =
+    (loanAmount *
+      monthlyInterestRate *
+      Math.pow(1 + monthlyInterestRate, paymentLength)) /
+    (Math.pow(1 + monthlyInterestRate, paymentLength) - 1);
+  return Number(monthlyPayment.toFixed(2));
 }
