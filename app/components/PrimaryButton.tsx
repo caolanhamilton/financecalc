@@ -1,17 +1,18 @@
-"use client";
-import React, { useContext } from "react";
+type Props = {
+  text: string;
+  onClickFunction?: () => void;
+  type: "button" | "submit" | "reset" | undefined;
+};
 
-type Props = { text: string };
-import { UserContext } from "../page"; 
-export default function PrimaryButton({ text }: Props) {
-  let { userAuthDetails } = useContext(UserContext);
-  console.log(userAuthDetails);
+export default function PrimaryButton({ text, onClickFunction, type }: Props) {
+
   return (
     <button
-      type="submit"
-      className="h-12 font-extrabold text-white uppercase bg-green-600 rounded-md w-72"
+      type={type}
+      className="h-12 font-bold text-white uppercase bg-green-600 rounded-md w-72"
+      onClick={onClickFunction}
     >
-      Apply now
+      {text}
     </button>
   );
 }

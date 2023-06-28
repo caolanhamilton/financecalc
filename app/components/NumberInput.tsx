@@ -2,11 +2,11 @@ import React from "react";
 
 type Props = {
   labelText: string;
-  setState: React.Dispatch<React.SetStateAction<number | undefined>>;
-  state: number | undefined;
+  setState: React.Dispatch<React.SetStateAction<string | undefined>>;
+  state: string | undefined;
 };
 
-export default function TextInputField({ labelText, setState, state }: Props) {
+export default function NumberInput({ labelText, setState, state }: Props) {
   return (
     <label>
       <p className="mb-6 text-xl text-green-600">{labelText}</p>
@@ -15,10 +15,13 @@ export default function TextInputField({ labelText, setState, state }: Props) {
           <p className="text-lg font-bold text-white">£</p>
         </div>
         <input
-          className="w-full rounded-md"
-          type="text"
-          onChange={(e) => setState(Number(e.target.value))}
+          className="w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          type="number"
+          min={0}
+          minLength={0}
+          onChange={(e) => setState(e.target.value)}
           value={state}
+          required
         ></input>
       </div>
     </label>

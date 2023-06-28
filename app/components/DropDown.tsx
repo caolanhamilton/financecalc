@@ -1,14 +1,17 @@
 import React from "react";
-import getInterestFromString from "../utils/getInterestFromString";
 
 type Props = {
-  options: string[];
+  options: {
+    [key: string]: { apr: number; length: number };
+  };
   setPaymentLength: React.Dispatch<React.SetStateAction<number>>;
+  setApr: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function DropDown({ options, setPaymentLength }: Props) {
+
+export default function DropDown({ options, setPaymentLength, setApr }: Props) {
   return (
-    <div className="relative flex flex-row items-center p-2 mt-10 border border-green-600 rounded-md w-96 h-14">
+    <div className="relative flex flex-row items-center p-2 mt-10 border border-green-600 rounded-md w-full h-14">
       <label className="absolute px-2 text-sm font-bold text-green-600 bg-white -top-3 left-3 font-">
         Select alternative APR
       </label>
@@ -16,11 +19,12 @@ export default function DropDown({ options, setPaymentLength }: Props) {
         <select
           className="w-full pl-2 pr-8 bg-transparent bg-no-repeat appearance-none form-select"
           onChange={(e) => {
-            setPaymentLength(Number(e.target.value));
+            setPaymentLength(options[e.target.value].length);
+            setApr(options[e.target.value].apr);
           }}
         >
-          {options.map((option, index) => (
-            <option key={index} value={getInterestFromString(option)}>
+          {Object.keys(options).map((option, index) => (
+            <option key={index} value={option}>
               {option}
             </option>
           ))}

@@ -7,25 +7,35 @@ Amplify.configure({ ...awsExports, ssr: true });
 import Calculator from "./components/Calculator";
 import LegalDisclaimer from "./components/LegalDisclaimer";
 import { useState, useEffect, createContext, useContext } from "react";
+import { getUserApplications } from "@/apiservices/applicationApiService";
+import { postUser } from "@/apiservices/userApiService";
 type UserContextType = {
-  userAuthDetails: any; // replace 'any' with the type of your user details
+  userJWT: any; // replace 'any' with the type of your user details
 }; //UPDATE TYPE
 
 export const UserContext = createContext<UserContextType>({
-  userAuthDetails: undefined,
+  userJWT: undefined,
 });
 function Home() {
-  const [userAuthDetails, setUserAuthDetails] = useState();
+  const [userJWT, setUserJWT] = useState();
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser().then((user) => {
-      console.log(user);
-      setUserAuthDetails(user);
-    });
-  }, []);
+    async function getCurrentAuthenticatedUser() {
+      const authenticatedUser = await Auth.currentAuthenticatedUser();
+      setUserJWT(authenticatedUser.signInUserSession.accessToken.jwtToken);
+      let user = {
+        email: authenticatedUser.attributes.email,
+        first_name: authenticatedUser.attributes.given_name,
+        second_name: authenticatedUser.attributes.family_name,
+      };
+      postUser(user, authenticatedUser.signInUserSession.accessToken.jwtToken);
+    }
 
+    getCurrentAuthenticatedUser();
+  }, []);
+  console.log(userJWT);
   return (
-    <UserContext.Provider value={{ userAuthDetails }}>
+    <UserContext.Provider value={{ userJWT }}>
       <div className="flex flex-col items-center justify-center h-auto bg-gray-100">
         <Calculator />
         <LegalDisclaimer />
