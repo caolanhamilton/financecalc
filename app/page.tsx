@@ -6,18 +6,17 @@ import awsExports from "./aws-exports";
 Amplify.configure({ ...awsExports, ssr: true });
 import Calculator from "./components/Calculator";
 import LegalDisclaimer from "./components/LegalDisclaimer";
-import { useState, useEffect, createContext, useContext } from "react";
-import { getUserApplications } from "@/apiservices/applicationApiService";
+import { useState, useEffect, createContext } from "react";
 import { postUser } from "@/apiservices/userApiService";
 type UserContextType = {
-  userJWT: any; // replace 'any' with the type of your user details
-}; //UPDATE TYPE
+  userJWT: string;
+};
 
 export const UserContext = createContext<UserContextType>({
-  userJWT: undefined,
+  userJWT: "",
 });
 function Home() {
-  const [userJWT, setUserJWT] = useState();
+  const [userJWT, setUserJWT] = useState("");
 
   useEffect(() => {
     async function getCurrentAuthenticatedUser() {
@@ -33,10 +32,9 @@ function Home() {
 
     getCurrentAuthenticatedUser();
   }, []);
-  console.log(userJWT);
   return (
     <UserContext.Provider value={{ userJWT }}>
-      <div className="flex flex-col items-center justify-center h-auto bg-gray-100">
+      <div className="flex flex-col items-center justify-between h-screen bg-gray-100">
         <Calculator />
         <LegalDisclaimer />
       </div>

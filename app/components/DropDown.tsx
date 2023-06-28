@@ -17,7 +17,7 @@ export default function DropDown({ options, setPaymentLength, setApr }: Props) {
       </label>
       <div className="flex flex-row w-full">
         <select
-          className="w-full pl-2 pr-8 bg-transparent bg-no-repeat appearance-none form-select"
+          className="w-full pl-2 pr-8 bg-transparent bg-no-repeat appearance-none form-select text-sm lg:text-lg"
           onChange={(e) => {
             setPaymentLength(options[e.target.value].length);
             setApr(options[e.target.value].apr);

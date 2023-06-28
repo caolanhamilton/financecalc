@@ -14,7 +14,6 @@ export async function getUserApplications(token: string) {
 
   try {
     const data = await response.json();
-    console.log(response);
     return data;
   } catch (error) {
     console.log(error);
@@ -24,7 +23,6 @@ export async function getUserApplications(token: string) {
 
 export async function postApplication(application: Application, token: string) {
   try {
-    console.log(application);
     const response = await fetch(
       "https://financecalc-be-production.up.railway.app/applications",
       {
@@ -42,5 +40,6 @@ export async function postApplication(application: Application, token: string) {
     }
   } catch (error) {
     console.log(error);
+    throw error
   }
 }

@@ -1,4 +1,4 @@
-const loanMessageToAPR = {
+const loanMap = {
   "Interest Free 6 Months": { apr: 0, length: 6 },
   "Interest Free 10 Months": { apr: 0, length: 10 },
   "Interest Free 12 Months": { apr: 0, length: 12 },
@@ -8,4 +8,4 @@ const loanMessageToAPR = {
   "Interest Bearing 14.9% over 60 months": { apr: 14.9, length: 60 },
 };
 
-export default loanMessageToAPR;
+export default loanMap;
